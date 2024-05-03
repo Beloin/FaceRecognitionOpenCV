@@ -7,6 +7,8 @@
 3. Feature Extraction
 3. Face Recognition
 
+![Pipeline](./pipeline.jpg)
+
 ## Face Detection
 
 https://www.geeksforgeeks.org/opencv-c-program-face-detection/
