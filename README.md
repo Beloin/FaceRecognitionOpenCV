@@ -22,6 +22,12 @@ https://www.geeksforgeeks.org/opencv-c-program-face-detection/
 https://docs.opencv.org/3.4/da/d60/tutorial_face_main.html
 
 
+# How to code?
+
+First we need to save the person model beforehand, setting up the person who will be able to thresspass security.
+Then, the idea is to run an video as a "real time camera" and accept that person if the video contains the person.
+
+
 ## References
 
 1. [Reference Article](https://www.mdpi.com/1424-8220/20/2/342) 
@@ -39,3 +45,24 @@ Run example
 ```
 ./face_reco_example --i1=./data/rock_02.jpg --i2=./data/rock_03.jpg --fd=./face_detection_yunet_2023mar.onnx --fr=./face_recognition_sface_2021dec.onnx
 ```
+
+# Hardware used:
+
+OpenCV Version 4.9.0  
+g++ (GCC) 13.2.1 20230801
+
+System:
+
+ - Kernel: 6.1.85-1-MANJARO arch x86_64 bits 64 compiler gcc v 13.2.1
+ - Desktop: i3 v 4.23 Manjaro - Arch Linux  
+
+CPU:
+ - Info: 8-core AMD Ryzen 7 2700 64 bits 
+ - Freq: min/max 1550/3200 
+
+Graphics:
+ - Device: NVIDIA TU106 [GeForce RTX 2060 Rev. A] Gigabyte
+ - Driver: nvidia v550.67
+
+Info:
+ - Memory: 32 GiB
