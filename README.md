@@ -1,5 +1,9 @@
 # Face Recognition
 
+## Instalation
+
+1. `sudo pacman -S opencv`
+
 ## Pipeline
 
 1. Video acquisition
@@ -24,3 +28,14 @@ https://docs.opencv.org/3.4/da/d60/tutorial_face_main.html
 2. [OpenCV Site for face Recognition](https://docs.opencv.org/3.4/da/d60/tutorial_face_main.html)
 3. [Face Detection](https://www.geeksforgeeks.org/opencv-c-program-face-detection/)
 
+# Usage of example gaved by OpenCV itself:
+Compile with:
+
+```bash
+g++ face_reco_example.cpp -L /usr/lib64/libopencv_*  -I/usr/include/opencv4  -o face_reco_example
+```
+
+Run example
+```
+./face_reco_example --i1=./data/rock_02.jpg --i2=./data/rock_03.jpg --fd=./face_detection_yunet_2023mar.onnx --fr=./face_recognition_sface_2021dec.onnx
+```
