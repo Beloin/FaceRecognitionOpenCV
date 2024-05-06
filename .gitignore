@@ -35,3 +35,7 @@ build
 
 compile_commands.json
 .cache
+
+.idea
+
+cmake-build-debug

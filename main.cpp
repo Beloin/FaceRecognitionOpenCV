@@ -1,25 +1,28 @@
 #include <opencv2/opencv.hpp>
-#include <stdio.h>
+#include <csignal>
+#include "src/face_models.h"
 
 using namespace cv;
 
+
 int main(int argc, char **argv) {
-  if (argc != 2) {
-    printf("usage: DisplayImage.out <Image_Path>\n");
-    return -1;
-  }
+    char str[100];
+    getcwd(str, 99);
+    const auto &basicString = std::string(str);
 
-  Mat image;
-  image = imread(argv[1], IMREAD_COLOR);
+    std::string detectorPath{basicString + "/face_detection_yunet_2023mar.onnx"};
+    std::string recognizerPath{basicString + "/face_recognition_sface_2021dec.onnx"};
 
-  if (!image.data) {
-    printf("No image data \n");
-    return -1;
-  }
-  namedWindow("Display Image", WINDOW_AUTOSIZE);
-  imshow("Display Image", image);
+    SetDetectorPath(detectorPath);
+    SetRecognizerPath(recognizerPath);
 
-  while(waitKey(0) != 'q');
+    Mat image = imread("../data/face_05.png"); // TODO: Remember to use something more stable, os asks in input
+    Mat faces;
 
-  return 0;
+//    FindFaces(image, faces);
+    FindAndShow(image);
+
+    return 0;
 }
+
+

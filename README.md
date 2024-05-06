@@ -34,7 +34,7 @@ Then, the idea is to run an video as a "real time camera" and accept that person
 2. [OpenCV Site for face Recognition](https://docs.opencv.org/3.4/da/d60/tutorial_face_main.html)
 3. [Face Detection](https://www.geeksforgeeks.org/opencv-c-program-face-detection/)
 
-# Usage of example gaved by OpenCV itself:
+# Usage of example gaved by OpenCV:
 Compile with:
 
 ```bash
