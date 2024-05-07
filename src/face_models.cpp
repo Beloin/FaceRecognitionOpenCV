@@ -31,7 +31,7 @@ bool FindFaces(Mat &image, Mat &faces) {
     const Size &sz = image.size();
     auto detector = GetDetector(detectorPath, Size(sz.width, sz.height));
 
-    detector->detect(image, faces);
+    int status = detector->detect(image, faces);
     if (faces.rows < 1) return false;
 
     return true;
@@ -41,8 +41,32 @@ void FindAndShow(Mat &image) {
     Mat faces;
     TickMeter tm;
     tm.start();
-    FindFaces(image, faces);
+    auto found = FindFaces(image, faces);
+    if (!found) {
+        cout << "could not find any face" << endl;
+        return;
+    }
     tm.stop();
 
     visualize(image, -1, faces, tm.getFPS());
+}
+
+static Recognizer recognizer;
+
+void ExtractFeatures(Mat &image, Mat &faces, Mat &outFeatures) {
+    if (recognizer.empty())
+        recognizer = GetRecognizer(recognizerPath);
+
+    Mat alignedFace;
+    recognizer->alignCrop(image, faces.row(0), alignedFace);
+    recognizer->feature(alignedFace, outFeatures);
+    outFeatures = outFeatures.clone();
+}
+
+double CosScore(Mat &feature01, Mat &feature02) {
+    return recognizer->match(feature01, feature02, FaceRecognizerSF::DisType::FR_COSINE);
+}
+
+double L2Score(Mat &feature01, Mat &feature02) {
+    return recognizer->match(feature01, feature02, FaceRecognizerSF::DisType::FR_NORM_L2);
 }
