@@ -7,7 +7,7 @@ project(
   LANGUAGES CXX
 )
 
-add_executable(face_recognition main.cpp src/face_models.cpp src/face_models.h src/opencvutils.h)
+add_executable(face_recognition main.cpp src/face_models.cpp src/face_models.h src/opencvutils.h src/Recognizer.cpp src/Recognizer.h)
 
 find_package( OpenCV REQUIRED )
 include_directories(${OpenCV_INCLUDE_DIRS})
