@@ -6,7 +6,6 @@
 #include "opencvutils.h"
 
 static std::string detectorPath;
-static std::string recognizerPath;
 
 Ptr<FaceDetectorYN> GetDetector(std::string &path, Size size) {
     auto scoreThreshold = .9F;
