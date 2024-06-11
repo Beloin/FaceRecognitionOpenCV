@@ -5,6 +5,7 @@
 #include <csignal>
 #include "src/SimpleRecognizer.h"
 #include "src/utils/file_exists.h"
+#include "./dart_interface.h"
 
 #define COS_T 0.363
 #define L2_T  1.128
@@ -18,9 +19,10 @@ extern "C" {
 
 __attribute__((visibility("default")))
 __attribute__((used))
-int are_equal(const char *p1, const char *p2) {
+int are_equal(char *p1, char *p2) {
     return are_equalcpp(p1, p2);
 }
+
 }
 
 bool are_equalcpp(const char *p1, const char *p2) {
