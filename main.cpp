@@ -1,7 +1,5 @@
 #include <opencv2/opencv.hpp>
 #include <csignal>
-#include "src/face_models.h"
-#include "src/Recognizer.h"
 #include "src/SimpleRecognizer.h"
 #include "src/utils/file_exists.h"
 
@@ -37,7 +35,6 @@ int main(int argc, char **argv) {
 
     if (!simpleReco.Equals(eminem_1, randomPerson))
         std::cout << "Eminem is indeed not Taylor" << std::endl;
-
 
     return 0;
 }

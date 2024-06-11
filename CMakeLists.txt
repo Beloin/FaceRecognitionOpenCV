@@ -20,7 +20,12 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 
 target_link_libraries(face_recognition ${OpenCV_LIBRARIES})
 
-add_library(dart_interface SHARED dart_interface.cpp)
+add_library(dart_interface SHARED dart_interface.cpp      src/face_models.cpp src/face_models.h
+        src/opencvutils.h
+        src/Recognizer.cpp src/Recognizer.h
+        src/SimpleRecognizer.cpp src/SimpleRecognizer.h
+        src/utils/file_exists.h )
+target_link_libraries(dart_interface ${OpenCV_LIBRARIES})
 #target_link_libraries(dart_interface dart_interface)
 
 configure_file(./face_detection_yunet_2023mar.onnx face_detection_yunet_2023mar.onnx COPYONLY)
