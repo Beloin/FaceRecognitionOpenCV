@@ -14,8 +14,9 @@ bool are_equalcpp(const char *p1, const char *p2);
 
 std::string get_pwd();
 
-
+#ifdef __cplusplus
 extern "C" {
+#endif
 
 __attribute__((visibility("default")))
 __attribute__((used))
@@ -23,7 +24,9 @@ int are_equal(char *p1, char *p2) {
     return are_equalcpp(p1, p2);
 }
 
+#ifdef __cplusplus
 }
+#endif
 
 bool are_equalcpp(const char *p1, const char *p2) {
     std::string p1str{p1};
