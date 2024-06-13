@@ -38,5 +38,6 @@ compile_commands.json
 
 .idea
 .venv
+venv
 
 cmake-build-debug
