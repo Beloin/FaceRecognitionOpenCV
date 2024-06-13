@@ -1,5 +1,5 @@
 #include <opencv2/opencv.hpp>
-#include <csignal>
+#include <unistd.h>
 #include "src/SimpleRecognizer.h"
 #include "src/utils/file_exists.h"
 

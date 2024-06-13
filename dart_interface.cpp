@@ -2,10 +2,10 @@
 // Created by beloin on 10/06/24.
 //
 
-#include <csignal>
 #include "src/SimpleRecognizer.h"
 #include "src/utils/file_exists.h"
 #include "./dart_interface.h"
+#include <unistd.h>
 
 #define COS_T 0.363
 #define L2_T  1.128
