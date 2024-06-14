@@ -30,34 +30,38 @@ COPY --from=OPENCV_BUILD_STAGE /lib /lib
 
 COPY . .
 
-RUN pwd
-RUN ls
 RUN rm -rf build
 RUN bash -c "cmake -S . -Bbuild"
 
 WORKDIR build
-RUN pwd
-RUN ls
 RUN bash -c "make"
 
-RUN ls
 
-FROM python:3.10-slim-buster
+FROM ubuntu:18.04 as RUN_IMAGE
 
 WORKDIR /app
 
-COPY req.txt req.txt
-RUN pip3 install -r req.txt
+RUN apt-get update
+RUN apt-get install -y python3 python3-pip
 
-COPY main_server.py main_server.py
+COPY req.txt req.txt
+RUN pip3 install Flask
+
+COPY main_server.py app.py
 
 COPY --from=OPENCV_BUILD_STAGE /usr/local/include/opencv4/opencv2 /usr/local/include/opencv2
 COPY --from=OPENCV_BUILD_STAGE /usr/local/bin /usr/local/bin
 COPY --from=OPENCV_BUILD_STAGE /usr/local/lib /usr/local/lib
 COPY --from=OPENCV_BUILD_STAGE /usr/lib /usr/lib
 COPY --from=OPENCV_BUILD_STAGE /lib /lib
-
 COPY --from=CXX_BUILD_STAGE /app/build/libdart_interface.so /app/libdart_interface.so
+COPY --from=CXX_BUILD_STAGE /app/build/face_detection_yunet_2023mar.onnx /app/face_detection_yunet_2023mar.onnx
+COPY --from=CXX_BUILD_STAGE /app/build/face_recognition_sface_2021dec.onnx /app/face_recognition_sface_2021dec.onnx
 
 EXPOSE 5000
-ENTRYPOINT [ "python3", "-m" , "flask", "--app", "main_server", "run", "--host=0.0.0.0"]
+RUN echo "export LC_ALL=C.UTF-8;" >> ./entrypoint.sh
+RUN echo "export LANG=C.UTF-8;" >> ./entrypoint.sh
+RUN echo "python3 -m flask run --host=0.0.0.0;" >> ./entrypoint.sh
+RUN chmod +x entrypoint.sh
+RUN cat entrypoint.sh
+ENTRYPOINT ["bash", "-c", "\"./entrypoint.sh\""]
